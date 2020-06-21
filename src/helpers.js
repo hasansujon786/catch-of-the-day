@@ -9,6 +9,10 @@ export function rando(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+export function isObjectEmpty(obj = {}) {
+  return Object.keys(obj).length === 0
+}
+
 export function slugify(text) {
   return text
     .toString()
