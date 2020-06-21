@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import {formatPrice, isObjectEmpty} from '../helpers'
 
 class Order extends Component {
@@ -9,22 +10,32 @@ class Order extends Component {
     const price = count * fish.price
     let renderFish = null
     if (fish.status === 'available') {
-      renderFish = `${count} lbs ${fish.name} ${formatPrice(price)}`
+      renderFish = <span>
+        <TransitionGroup component='span' className='count'>
+          <CSSTransition classNames='count' timeout={{enter: 500, exit: 500}} key={count}>
+            <span>{count}</span>
+          </CSSTransition>
+        </TransitionGroup>
+        &nbsp;
+        {` lbs ${fish.name} - ${formatPrice(price)}`}
+      </span>
     } else {
       renderFish = `Sorry, ${fish && fish.name ? fish.name : 'fish'} not available`
     }
 
     return (
-      <li key={key} >
-        {renderFish}
-        <button onClick={() => removeFromOrder(key)}>&times;</button>
-      </li>
+      <CSSTransition key={key} classNames='order' timeout={{enter: 500, exit: 500}}>
+        <li key={key} >
+          {renderFish}
+          <button onClick={() => removeFromOrder(key)}>&times;</button>
+        </li>
+      </CSSTransition>
     )
   }
 
   render() {
     const {order, fishes} = this.props;
-    // make sure fish is loaded then continu
+    // make sure fish is loaded then continue
     if (isObjectEmpty(fishes) || isObjectEmpty(order)) {
       return (
         <div>
@@ -32,8 +43,7 @@ class Order extends Component {
           <ul className="order">
           </ul>
           <div className="total">
-            Total:
-          <strong>{formatPrice(0)}</strong>
+            Total: <strong>{formatPrice(0)}</strong>
           </div>
         </div>
       )
@@ -51,12 +61,11 @@ class Order extends Component {
     return (
       <div>
         <h2>order</h2>
-        <ul className="order">
+        <TransitionGroup component='ul' className="order">
           {orderIds.map(this.renderOrder)}
-        </ul>
-        <div className="total">
-          Total:
-          <strong>{formatPrice(total)}</strong>
+        </TransitionGroup>
+        <div className="total" >
+          Total: <strong>{formatPrice(total)}</strong>
         </div>
       </div>
     )
