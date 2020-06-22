@@ -6,6 +6,7 @@
     "autoprefixer-stylus": "^1.0.0",
     "cra-template": "1.0.3",
     "firebase": "^7.15.2",
+    "prop-types": "^15.7.2",
     "re-base": "^4.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
