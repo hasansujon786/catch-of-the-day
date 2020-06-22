@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const EditFishForm = ({fish, index, updateFish, deleteFish}) => {
   const handleChange = (e) => {
@@ -24,6 +25,18 @@ const EditFishForm = ({fish, index, updateFish, deleteFish}) => {
   )
 }
 
+EditFishForm.propTypes = {
+  fish: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    desc: PropTypes.string,
+    status: PropTypes.string
+  }),
+  index: PropTypes.string,
+  updateFish: PropTypes.func,
+  deleteFish: PropTypes.func
+}
 export default EditFishForm
 
 

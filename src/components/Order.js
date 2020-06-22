@@ -1,8 +1,15 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import {formatPrice, isObjectEmpty} from '../helpers'
 
 class Order extends Component {
+  static propTypes = {
+    order: PropTypes.object,
+    fishes: PropTypes.object,
+    removeFromOrder: PropTypes.func
+  }
+
   renderOrder = (key) => {
     const {order, fishes, removeFromOrder} = this.props;
     const fish = fishes[key]

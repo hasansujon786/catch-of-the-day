@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {formatPrice} from '../helpers'
 
 const Fish = ({fish, index, addToOrder}) => {
@@ -20,4 +21,15 @@ const Fish = ({fish, index, addToOrder}) => {
   )
 }
 
+Fish.propTypes = {
+  fish: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    desc: PropTypes.string,
+    status: PropTypes.string
+  }),
+  addToOrder: PropTypes.func,
+  index: PropTypes.string
+}
 export default Fish
