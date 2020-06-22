@@ -33,10 +33,6 @@ class App extends Component {
   componentWillUnmount() {
     base.removeBinding(this.ref)
   }
-  componentDidUpdate() {
-    console.log(this.state.fishes)
-  }
-
 
   addFish = (fish) => {
     const fishes = {...this.state.fishes}
@@ -91,6 +87,7 @@ class App extends Component {
 
         <Order fishes={fishes} order={order} removeFromOrder={this.removeFromOrder} />
         <Inventory
+          storeId={this.props.match.params.storeId}
           fishes={fishes}
           loadSampleFishes={this.loadSampleFishes}
           addFish={this.addFish}

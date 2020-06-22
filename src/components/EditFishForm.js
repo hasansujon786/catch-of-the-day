@@ -7,7 +7,7 @@ const EditFishForm = ({fish, index, updateFish, deleteFish}) => {
       ...fish,
       [e.target.name]: e.target.value
     }
-    updateFish(index, updatedFish)
+    updateFish(index, {...updatedFish, price: parseFloat(updatedFish.price)})
   }
 
   return (
